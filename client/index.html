@@ -22,7 +22,23 @@
         }" ng-model="code"></div>
       </div>
       <div class="spec-runner">
-        {{ code }}
+        <div class="spec-container" ng-cloak>
+          <div class="specs whitelist">
+            <h3>Whitelist</h3>
+            {{ whitelist.pass }}
+            {{ whitelist.tests }}
+          </div>
+          <div class="specs blacklist">
+            <h3>Blacklist</h3>
+            {{ blacklist.pass }}
+            {{ blacklist.tests }}
+          </div>
+          <div class="specs structure">
+            <h3>Structure</h3>
+            {{ structure.pass }}
+            {{ structure.tests }}
+          </div>
+        </div>
       </div>
     </div>
   </div>

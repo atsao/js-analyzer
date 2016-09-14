@@ -6,12 +6,18 @@ var app = angular.module('jsparser', [
 app.controller('MainController', function($scope, $http) {
   $scope.parsed = {};
   $scope.loading = false;
-  $scope.whitelistPass = false;
-  $scope.whitelistTests = [];
-  $scope.blacklistPass = false;
-  $scope.blaclistTests = [];
-  $scope.structurePass = false;
-  $scope.structureTests = [];
+  $scope.whitelist = {
+    pass: false,
+    tests: []
+  }
+  $scope.blacklist = {
+    pass: false,
+    tests: []
+  }
+  $scope.structure = {
+    pass: false,
+    tests: []
+  }
   
   $scope.testCode = function() {
     $scope.loading = true;
@@ -30,15 +36,18 @@ app.controller('MainController', function($scope, $http) {
       return $http.get('/api/analyze/whitelist');
     })
     .then(function(response) {
-      console.log('whitelist data:', response.data);
+      $scope.whitelist.pass = response.data.pass;
+      $scope.whitelist.tests = response.data.tests;
       return $http.get('/api/analyze/blacklist');
     })
     .then(function(response) {
-      console.log('blacklist data:', response.data);
+      $scope.blacklist.pass = response.data.pass;
+      $scope.blacklist.tests = response.data.tests;
       return $http.get('/api/analyze/structure');
     })
     .then(function(response) {
-      console.log('structure data:', response.data);
+      $scope.structure.pass = response.data.pass;
+      $scope.structure.tests = response.data.tests;
     })
     .catch(function(error) {
       console.error(error);

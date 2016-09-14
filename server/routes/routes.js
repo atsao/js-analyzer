@@ -15,20 +15,17 @@ module.exports = function(app) {
   });
 
   app.route('/whitelist').get(function(req, res) {
-    // console.log('whitelist req:', req.body);
     var result = tester.whitelist(parsed);
     res.send(result);
   });
 
   app.route('/blacklist').get(function(req, res) {
-    console.log('blacklist req:', req.body)
-
-    res.send('blacklist testing');
+    var result = tester.blacklist(parsed);
+    res.send(result);
   });
 
   app.route('/structure').get(function(req, res) {
-    console.log('structure req:', req.body)
-
-    res.send('structure testing');
+    var result = tester.structure(parsed);
+    res.send(result);
   });
 }
