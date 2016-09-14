@@ -1,0 +1,38 @@
+{
+  "name": "angular-node-express",
+  "version": "1.0.0",
+  "description": "Template",
+  "main": "server/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server/server.js",
+    "postinstall": "bower cache clean && bower install"
+  },
+  "author": "Andrew Tsao",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "bower": "^1.7.9",
+    "esprima": "^3.0.0",
+    "express": "^4.14.0",
+    "morgan": "^1.7.0",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "cssnano": "^3.7.4",
+    "gulp": "^3.9.1",
+    "gulp-postcss": "^6.2.0",
+    "postcss": "^5.2.0",
+    "postcss-calc": "^5.3.1",
+    "postcss-clearfix": "^1.0.0",
+    "postcss-color-function": "^2.0.1",
+    "postcss-custom-media": "^5.0.1",
+    "postcss-import": "^8.1.2",
+    "postcss-map": "^0.8.0",
+    "postcss-media-minmax": "^2.1.2",
+    "postcss-neat": "^2.5.2",
+    "postcss-nested": "^1.0.0",
+    "postcss-opacity": "^4.0.0",
+    "postcss-simple-vars": "^3.0.0"
+  }
+}

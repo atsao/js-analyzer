@@ -1,0 +1,22 @@
+{
+  "name": "angular-node-express",
+  "description": "Template",
+  "main": "server/server.js",
+  "authors": [
+    "Andrew Tsao"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "client/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.8",
+    "angular-ui-ace": "^0.2.3"
+  }
+}
