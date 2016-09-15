@@ -34,7 +34,7 @@ function generateDatatypes(body) {
   var results = {};
 
   body.forEach(function(element) {
-    if (element.body !== undefined && element.body.body.length > 0) {
+    if (element.body !== undefined && element.body.body !== undefined && element.body.body.length > 0) {
       var nested = [];
       element.body.body.forEach(function(el) {
         nested.push(el.type);
@@ -54,7 +54,7 @@ function compareSpecs(datatypes, specs, containsFlag) {
 
   for (var k in specs) {
     if (Array.isArray(specs[k])) {
-      if (datatypes[k].length > 0) {
+      if (Array.isArray(datatypes[k]) && datatypes[k].length > 0) {
         specs[k].forEach(function(spec) {
           if (datatypes[k].indexOf(spec) === -1) {
             result = false;

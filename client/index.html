@@ -15,14 +15,12 @@
       </header>
       <div class="editor">
         <button ng-click="testCode()" class="btn btn-primary">Test Code</button>
-        <div ui-ace="{
-          mode: 'javascript',
-          theme: 'monokai',
-          useWrapMode: true
-        }" ng-model="code"></div>
+        <div ui-ace="aceOptions" ng-model="code" ng-model-options="{ debounce: 1000, blur: 0 }" ng-change="codeChanged()"></div>
       </div>
       <div class="spec-runner">
         <div class="spec-container" ng-cloak>
+          <h2>Errors</h2>
+          {{ errors }}
           <div class="specs whitelist">
             <h3>Whitelist</h3>
             {{ whitelist.pass }}

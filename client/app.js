@@ -5,6 +5,7 @@ var app = angular.module('jsparser', [
 
 app.controller('MainController', function($scope, $http) {
   $scope.parsed = {};
+  $scope.errors = [];
   $scope.loading = false;
   $scope.whitelist = {
     pass: false,
@@ -18,8 +19,34 @@ app.controller('MainController', function($scope, $http) {
     pass: false,
     tests: []
   }
+
+  $scope.aceOptions = {
+    mode: 'javascript',
+    theme: 'monokai',
+    useWrapMode: true,
+    onLoad: function(_ace) {},
+    onChange: function(_ace) {
+      $scope.codeChanged = function() {
+        var _session = _ace[1].getSession();
+        var annotations = [];
+
+        _session.$annotations.forEach(function(annotation) {
+          if (annotation.type === 'error') {
+            annotations.push(annotation.text);
+          }
+        });
+        $scope.errors = annotations;
+        if ($scope.errors.length === 0) {
+          $scope.testCode();
+        }
+      }
+    }
+  }
   
   $scope.testCode = function() {
+    if ($scope.code === '') return;
+    if ($scope.errors.length > 0) return;
+
     $scope.loading = true;
 
     var analyzeOptions = {
@@ -51,6 +78,7 @@ app.controller('MainController', function($scope, $http) {
     })
     .catch(function(error) {
       console.error(error);
+      // $scope.errors.push(error);
     })
     .finally(function() {
       console.log('end');
