@@ -15,7 +15,7 @@ html, body {
 body {
   font-family: $base-font-stack;
   color: $base-font-color;
-  font-size: $base-font-size;
+  font-size: calc($base-font-size)px;
   font-weight: $base-font-weight;
   line-height: $base-line-height;
 }
@@ -46,11 +46,20 @@ a:hover {
 }
 
 .editor {
+  margin-bottom: 40px;
+
   @neat-fill-parent;
 }
 
 .errors {
+  margin-bottom: 40px;
+  padding: 20px;
+
   @neat-fill-parent;
+}
+
+.errors p {
+  margin: 0;
 }
 
 .spec-runner {
@@ -58,7 +67,14 @@ a:hover {
 }
 
 .specs {
-  @neat-span-columns 4;
+  margin-bottom: 40px;
+  padding: 20px;
+
+  @neat-fill-parent;
+}
+
+.specs:nth-of-type(2n) {
+  background: $lightest-gray;
 }
 
 .ace_editor {
@@ -79,4 +95,32 @@ a:hover {
 
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak { 
   display: none !important;
+}
+
+.pass {
+  color: $green;
+  font-weight: $semibold-weight;
+}
+
+.fail {
+  color: $red;
+}
+
+.valid {
+  background: color($green l(+40%));
+}
+
+.invalid {
+  background: color($red l(+40%));
+}
+
+.errors-list,
+.tests-list li {
+  margin-left: 20px;
+}
+
+@media (--medium) {
+  .specs {
+    @neat-span-columns 4;
+  }
 }

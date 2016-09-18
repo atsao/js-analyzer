@@ -24,9 +24,11 @@ app.controller('MainController', function($scope, $http) {
 
   $scope.aceOptions = {
     mode: 'javascript',
-    theme: 'monokai',
+    theme: 'clouds',
     useWrapMode: true,
-    onLoad: function(_ace) {},
+    onLoad: function(_ace) {
+      _ace.focus();
+    },
     onChange: function(_ace) {
       $scope.codeChanged = function() {
         var _session = _ace[1].getSession();

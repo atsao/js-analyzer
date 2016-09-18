@@ -16,20 +16,20 @@
       <div class="editor">
         <div ui-ace="aceOptions" ng-model="code" ng-model-options="{ debounce: 1000, blur: 0 }" ng-change="codeChanged()"></div>
       </div>
-      <div class="errors">
+      <div class="errors" ng-class="errors.length ? 'invalid' : 'valid'">
         <h2>Errors</h2>
         <ul class="errors-list" ng-if="errors.length">
           <li ng-repeat="error in errors">{{ error }}</li>
-        </div>
+        </ul>
         <p ng-show="!errors.length">None! :)</p>
       </div>
       <div class="spec-runner">
         <div class="spinner" ng-show="loading"></div>
-        <div class="container" ng-show="codeTested">
+        <div ng-show="codeTested">
           <div class="specs whitelist">
             <h3>Whitelist</h3>
-            <div ng-if="whitelist.pass">PASS</div>
-            <div ng-if="!whitelist.pass">FAIL</div>
+            <div ng-if="whitelist.pass" class="pass">PASS</div>
+            <div ng-if="!whitelist.pass" class="fail">FAIL</div>
             <ul class="tests-list" ng-if="whitelist.tests.length">
               <p>{{ whitelist.pass ? 'Great! Your program contains:' : 'This program MUST have:' }}</p>
               <li ng-repeat="test in whitelist.tests">{{ test }}</li>
@@ -37,25 +37,24 @@
           </div>
           <div class="specs blacklist">
             <h3>Blacklist</h3>
-            <div ng-if="blacklist.pass">PASS</div>
-            <div ng-if="!blacklist.pass">FAIL</div>
+            <div ng-if="blacklist.pass" class="pass">PASS</div>
+            <div ng-if="!blacklist.pass" class="fail">FAIL</div>
             <ul class="tests-list" ng-if="blacklist.tests.length">
-              <p>{{ blacklist.pass ? 'Great! Your program doesn\'t contain:' : 'This program MUST NOT have:' }}</p>
+              <p>{{ blacklist.pass ? 'Nice work! Your program doesn\'t contain:' : 'This program MUST NOT have:' }}</p>
               <li ng-repeat="test in blacklist.tests">{{ test }}</li>
             </ul>
           </div>
           <div class="specs structure">
             <h3>Structure</h3>
-            <div ng-if="structure.pass">PASS</div>
-            <div ng-if="!structure.pass">FAIL</div>
+            <div ng-if="structure.pass" class="pass">PASS</div>
+            <div ng-if="!structure.pass" class="fail">FAIL</div>
             <ul class="tests-list" ng-if="structure.tests !== null">
-              <p>{{ structure.pass ? 'Great! Your program contains the patterns:' : 'This program should have these patterns:' }}</p>
+              <p>{{ structure.pass ? 'Looking good! Your program contains the patterns:' : 'This program should have these patterns:' }}</p>
               <li ng-repeat="(outer, inner) in structure.tests">
-                <p>A {{ outer }} that contains:
-                  <ul>
-                    <li ng-repeat="test in inner">{{ test }}</li>
-                  </ul>
-                </p>
+                {{ outer }} that contains:
+                <ul>
+                  <li ng-repeat="test in inner">{{ test }}</li>
+                </ul>
               </li>
             </ul>
           </div>
