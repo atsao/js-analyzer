@@ -7,34 +7,57 @@
   <link rel="stylesheet" href="/assets/css/styles.css" />
 </head>
 
-<body ng-controller="MainController">
+<body ng-controller="MainController" ng-cloak>
   <div class="wrapper">
     <div class="container">
       <header>
         <h1>JS Analyzer</h1>
       </header>
       <div class="editor">
-        <button ng-click="testCode()" class="btn btn-primary">Test Code</button>
         <div ui-ace="aceOptions" ng-model="code" ng-model-options="{ debounce: 1000, blur: 0 }" ng-change="codeChanged()"></div>
       </div>
+      <div class="errors">
+        <h2>Errors</h2>
+        <ul class="errors-list" ng-if="errors.length">
+          <li ng-repeat="error in errors">{{ error }}</li>
+        </div>
+        <p ng-show="!errors.length">None! :)</p>
+      </div>
       <div class="spec-runner">
-        <div class="spec-container" ng-cloak>
-          <h2>Errors</h2>
-          {{ errors }}
+        <div class="spinner" ng-show="loading"></div>
+        <div class="container" ng-show="codeTested">
           <div class="specs whitelist">
             <h3>Whitelist</h3>
-            {{ whitelist.pass }}
-            {{ whitelist.tests }}
+            <div ng-if="whitelist.pass">PASS</div>
+            <div ng-if="!whitelist.pass">FAIL</div>
+            <ul class="tests-list" ng-if="whitelist.tests.length">
+              <p>{{ whitelist.pass ? 'Great! Your program contains:' : 'This program MUST have:' }}</p>
+              <li ng-repeat="test in whitelist.tests">{{ test }}</li>
+            </ul>
           </div>
           <div class="specs blacklist">
             <h3>Blacklist</h3>
-            {{ blacklist.pass }}
-            {{ blacklist.tests }}
+            <div ng-if="blacklist.pass">PASS</div>
+            <div ng-if="!blacklist.pass">FAIL</div>
+            <ul class="tests-list" ng-if="blacklist.tests.length">
+              <p>{{ blacklist.pass ? 'Great! Your program doesn\'t contain:' : 'This program MUST NOT have:' }}</p>
+              <li ng-repeat="test in blacklist.tests">{{ test }}</li>
+            </ul>
           </div>
           <div class="specs structure">
             <h3>Structure</h3>
-            {{ structure.pass }}
-            {{ structure.tests }}
+            <div ng-if="structure.pass">PASS</div>
+            <div ng-if="!structure.pass">FAIL</div>
+            <ul class="tests-list" ng-if="structure.tests !== null">
+              <p>{{ structure.pass ? 'Great! Your program contains the patterns:' : 'This program should have these patterns:' }}</p>
+              <li ng-repeat="(outer, inner) in structure.tests">
+                <p>A {{ outer }} that contains:
+                  <ul>
+                    <li ng-repeat="test in inner">{{ test }}</li>
+                  </ul>
+                </p>
+              </li>
+            </ul>
           </div>
         </div>
       </div>

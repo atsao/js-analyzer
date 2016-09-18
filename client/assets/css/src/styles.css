@@ -46,15 +46,35 @@ a:hover {
 }
 
 .editor {
-  @neat-span-columns 6;
+  @neat-fill-parent;
+}
+
+.errors {
+  @neat-fill-parent;
 }
 
 .spec-runner {
-  @neat-span-columns 6;
+  @neat-fill-parent;
+}
+
+.specs {
+  @neat-span-columns 4;
 }
 
 .ace_editor {
-  height: 200px;
+  min-height: 200px;
+}
+
+.spinner {
+  background: url('../img/spinner.gif') center center no-repeat transparent;
+  display: block;
+  height: 100px;
+  margin: 0 auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
 }
 
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak { 

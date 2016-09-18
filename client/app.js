@@ -7,6 +7,8 @@ app.controller('MainController', function($scope, $http) {
   $scope.parsed = {};
   $scope.errors = [];
   $scope.loading = false;
+  $scope.codeTested = false;
+
   $scope.whitelist = {
     pass: false,
     tests: []
@@ -78,13 +80,11 @@ app.controller('MainController', function($scope, $http) {
     })
     .catch(function(error) {
       console.error(error);
-      // $scope.errors.push(error);
     })
     .finally(function() {
-      console.log('end');
-      console.log($scope.parsed);
       $scope.loading = false;
-    })
+      $scope.codeTested = true;
+    });
   }
 });
 
